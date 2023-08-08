@@ -3,10 +3,11 @@ const getRunning = require('./getRunning');
 const { isEmpty } = require('medash');
 
 module.exports = async (token, firstResult, callback) => {
-    if (isEmpty(firstResult)) {
+    if (isEmpty(firstResult)||isEmpty(token)) {
         console.warn('请求中断');
         return;
     }
+    
     let { lastTimestamp, records = [] } = firstResult;
     while (1) {
         if (isEmpty(lastTimestamp)) break;

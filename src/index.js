@@ -5,16 +5,36 @@ const getCycleTotal = require('./cycling');
 const { isEmpty, toArray } = require("medash");
 require('dotenv').config();
 
+const query = {
+    token: '',
+    date: 0
+}
+
+const two = 2 * 24 * 60 * 60 * 1000
+
+
 const data = { mobile: process.env.MOBILE, password: process.env.PASSWORD };
 
 const getFirstPageRecentUpdates = async () => {
-    const token = await login(data);
-    return await getRecentUpdates(token);
+    const diff = Math.abs(Date.now() - query.date);
+    if (diff > two) {
+        const token = await login(data);
+        query.token = token;
+        query.date = Date.now();
+    }
+
+    return await getRecentUpdates(query.token);
+    // return {k:1}
 }
 
 const getTotal = async () => {
-    const token = await login(data);
-    const result = await Promise.all([getRunTotal(token), getCycleTotal(token)])
+    const diff = Math.abs(Date.now() - query.date);
+    if (diff > two) {
+        const token = await login(data);
+        query.token = token;
+        query.date = Date.now();
+    }
+    const result = await Promise.all([getRunTotal(query.token), getCycleTotal(query.token)])
     const yearMap = new Map();
     if (isEmpty(result)) return;
     if (isEmpty(result[0])) return;

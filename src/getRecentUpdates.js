@@ -4,6 +4,7 @@ const getCycling = require('./getCycling');
 const { isEmpty, getYmdHms, toArray } = require('medash');
 
 module.exports = async (token) => {
+    if (isEmpty(token)) return
     const recentUpdateMap = new Map();
     const result = await Promise.all([getRunning(token), getCycling(token)]);
     result.forEach((r) => {
