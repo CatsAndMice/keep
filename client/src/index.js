@@ -7,18 +7,17 @@
             console.log(result);
             const { code, data = [] } = result
             if (code === 200) {
-                let str = ''
-                console.log(data);
+                let cycling = 0,
+                    running = 0;
+
                 data.forEach(d => {
-                    const { year, data: { cycleKmDistance, runKmDistance } } = d
-                    str += `<dl>
-                        <dt class="content-title"><strong>${year}</strong></dt>
-                        ${cycleKmDistance ? `<dd class="content-dd">骑行${cycleKmDistance}km</dd>` : ''}
-                        ${runKmDistance ? `<dd class="content-dd">跑步${runKmDistance}km</dd>` : ''}
-                    </dl>`
+                    const { data: { cycleKmDistance, runKmDistance } } = d
+                    cycling += cycleKmDistance
+                    running += runKmDistance
                 });
 
-                $('.total').html(str)
+                $('#cycling').text(`骑行${cycling}km`)
+                $('#running').text(`跑步${running}km`)
             }
         }
     })
@@ -34,7 +33,7 @@
                     const { date, data: result } = d
                     str += `<p>${date}${result.map(dt => dt).join('、')}</p>`
                 });
-                $('.recent-updates').html(str)
+                $('#recent-updates').html(str)
             }
         }
     })
