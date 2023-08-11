@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "pm2 start 'npm run serve'",
+    "start": "pm2 start index.js",
     "serve": "node index.js",
     "kill": "pm2 kill"
   },

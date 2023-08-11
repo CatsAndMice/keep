@@ -41,8 +41,8 @@
                         type[`${year}`] = [d]
                     }
                 });
-                console.log(type);
                 const keys = Array.from(Object.keys(type)).sort((a, b) => b - a)
+                
                 keys.forEach(k => {
                     const values = type[k];
                     let dataStr = ''
