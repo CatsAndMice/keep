@@ -28,11 +28,32 @@
         success(result) {
             const { code, data = [] } = result
             if (code === 200) {
-                let str = ''
-                data.slice(0, 30).forEach(d => {
-                    const { date, data: result } = d
-                    str += `<p>${date}${result.map(dt => dt).join('、')}</p>`
+                let str = `<div style="padding-top:20px; color: #00bc71; margin: 20px 0;
+                font-size: 25px;">最新动态</div>`
+                const type = {}
+                data.forEach(d => {
+                    const { date } = d
+                    const year = parseInt(date)
+                    const typeValue = type[`${year}`]
+                    if (typeValue) {
+                        typeValue.push(d)
+                    } else {
+                        type[`${year}`] = [d]
+                    }
                 });
+                console.log(type);
+                const keys = Array.from(Object.keys(type)).sort((a, b) => b - a)
+                keys.forEach(k => {
+                    const values = type[k];
+                    let dataStr = ''
+                    values.forEach((v) => {
+                        const { date, data } = v
+                        dataStr += `<div>
+                                    ${date.replace(`${k}年`, '') +'，'+ data.map(dt => dt).join('、')}
+                                    </div ><br>`
+                    })
+                    str += `<div style="display:flex;margin-bottom:30px;color: #3f3f3f;font-size:14px"> <div style="width:50px;">${k}</div><div>${dataStr}</div></div>`
+                })
                 $('#recent-updates').html(str)
             }
         }

@@ -22,7 +22,6 @@ app.get('/total', async (req, res) => {
 
 app.get('/recent-updates', async (req, res) => {
     const [err,result] = await to(getFirstPageRecentUpdates()) 
-    console.log(err);
     if (result) {
         res.send(JSON.stringify({ code: 200, data: result, msg: '请求成功' }));
         return
