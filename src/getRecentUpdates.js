@@ -1,5 +1,4 @@
 const getRunning = require('./getRunning');
-const getWalking = require('./getWalking');
 const getCycling = require('./getCycling');
 const { isEmpty, getYmdHms, toArray } = require('medash');
 

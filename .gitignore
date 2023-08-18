@@ -9,6 +9,7 @@ yarn-error.log
 /public
 # Build directory
 /build
+/ssl
 .DS_Store
 .sass-cache/
 _posts/
