@@ -1,7 +1,7 @@
 
 (async () => {
     $.ajax({
-        url: 'https://127.0.0.1:3000/total',
+        url: 'http://localhost:3000/total',
         dataType: 'json',
         success(result) {
             console.log(result);
@@ -23,7 +23,7 @@
     })
 
     $.ajax({
-        url: 'https://127.0.0.1:3000/recent-updates',
+        url: 'http://localhost:3000/recent-updates',
         dataType: 'json',
         success(result) {
             const { code, data = [] } = result
